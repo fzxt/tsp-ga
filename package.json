@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Travelling salesman problem solved via a genetic algorithm",
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server --colors --output-public-path=/out/",
+    "dev": "webpack-dashboard -- webpack-dev-server --colors --output-public-path=/out/",
     "test": "TS_NODE_PROJECT=tests mocha -r ts-node/register tests/**/*.spec.ts",
     "build": "webpack"
   },

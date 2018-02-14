@@ -1,20 +1,16 @@
 # TSP - GA
 
-<div align="center">
-  <a href="https://travis-ci.com/fzxt/tsp-ga">
-    <img src="https://travis-ci.com/fzxt/tsp-ga.svg?token=TT9qSQ7v8Pwz8MWFLCnw&branch=master" alt="Build Status">
-  </a>
-</div>
+[![Build Status](https://travis-ci.com/fzxt/tsp-ga.svg?token=TT9qSQ7v8Pwz8MWFLCnw&branch=master)](https://travis-ci.com/fzxt/tsp-ga)
 
-Travelling salesman problem solved via a genetic algorithm
+> Travelling salesman problem solved via genetic algorithm
 
-# Dev
+## Dev
 ```
 npm install
-npm start
+npm run dev
 ```
 
-Then navigate to localhost:8080
+Then navigate to `http://localhost:8080`, server run by webpack-dev-server
 
 ## Build
 `npm run build`
