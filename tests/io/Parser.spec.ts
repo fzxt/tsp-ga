@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import Parser from "../../src/io/Parser";
+import Parser from "../../src/data/Parser";
 import City from "../../src/tsp/City";
 
 const testData = `NAME: dj38
