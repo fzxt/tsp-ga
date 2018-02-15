@@ -1,5 +1,4 @@
 {   
-    "target": "es5",
     "compilerOptions": {
         "lib": [
             "es6",
