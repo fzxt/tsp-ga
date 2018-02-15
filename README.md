@@ -15,5 +15,7 @@ Then navigate to `http://localhost:8080`, server run by webpack-dev-server
 ## Build
 `npm run build`
 
+Will generate a `bundle.js` file in the `out` directory.
+
 ## Run tests
 `npm test`
