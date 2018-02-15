@@ -16,11 +16,10 @@ export default class Generation {
       return 0;
     }
 
-    let sum = 0;
-
-    this.tours.forEach(tour => {
-      sum += tour.totalDistance;
-    });
+    const sum = this.tours.reduce(
+      (sum, { totalDistance }) => sum + totalDistance,
+      0
+    );
 
     return sum / this.tours.length;
   }
