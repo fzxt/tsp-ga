@@ -1,14 +1,9 @@
 import City from "./City";
 
 export default class Tour {
-  public cities: City[];
-  public fitness: number;
+  constructor(public cities: City[]) {}
 
-  constructor(cities: City[]) {
-    this.cities = cities;
-  }
-
-  get totalDistance(): number {
+  public get totalDistance(): number {
     const n = this.cities.length;
 
     if (n === 0) {
