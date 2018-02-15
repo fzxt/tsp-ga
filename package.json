@@ -4,7 +4,8 @@
   "description": "Travelling salesman problem solved via a genetic algorithm",
   "scripts": {
     "dev": "webpack-dashboard -- webpack-dev-server --colors --output-public-path=/out/",
-    "test": "TS_NODE_PROJECT=tests/tsconfig.test.json mocha -r ts-node/register tests/**/*.spec.ts",
+    "test": "TS_NODE_PROJECT=tests/tsconfig.test.json nyc mocha -r ts-node/register tests/**/*.spec.ts",
+    "cc-coverage": "codeclimate-test-reporter < coverage/lcov.info",
     "build": "webpack"
   },
   "author": "",
@@ -18,6 +19,7 @@
     "awesome-typescript-loader": "^3.4.1",
     "chai": "^4.1.2",
     "mocha": "^5.0.1",
+    "nyc": "^11.4.1",
     "raw-loader": "^0.5.1",
     "sinon": "^4.3.0",
     "sinon-chai": "^2.14.0",
@@ -29,5 +31,21 @@
     "webpack": "^3.11.0",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-server": "^2.11.1"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "tests/**/*.ts",
+      "out/**/*.*",
+      "webpack.config.js",
+      "coverage/*",
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "lcov"
+    ],
+    "all": true  
   }
 }
