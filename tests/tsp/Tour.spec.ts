@@ -44,4 +44,22 @@ describe("Tour", () => {
       expect(actual).to.be.closeTo(expectedTotalDistance, 0.01);
     });
   });
+
+  describe("swapCitiesByIndex", () => {
+    it("should throw RangeError when given two invalid indices", () => {
+      const tour: Tour = new Tour([]);
+      expect(() => tour.swapCitiesByIndex(-1, 100)).to.throw(RangeError);
+    });
+
+    it("should swap correctly when given two valid indices", () => {
+      const beforeSwap: Tour = new Tour([
+        new City({ x: 100, y: 100 }),
+        new City({ x: 200, y: 200 })
+      ]);
+
+      const afterSwap: Tour = new Tour([...beforeSwap.cities]);
+      afterSwap.swapCitiesByIndex(0, 1);
+      expect(afterSwap.cities).to.not.deep.equal(beforeSwap.cities);
+    });
+  });
 });
