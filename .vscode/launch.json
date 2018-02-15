@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Mocha Tests",
       "env": {
-        "TS_NODE_PROJECT": "tests"
+        "TS_NODE_PROJECT": "tests/tsconfig.test.json"
       },
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
