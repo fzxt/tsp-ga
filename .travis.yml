@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - "8"
 cache: yarn
+before_install:
+  - npm install -g codeclimate-test-reporter
 after_script:
-  - yarn global add codeclimate-test-reporter
-  - yarn run cc-coverage after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run cc-coverage
