@@ -15,10 +15,7 @@ describe("Parser", () => {
   it("should throw error on bad data", () => {
     expect(() => {
       Parser.getCities(`this is bad data`);
-    }).to.throw(
-      Error,
-      "Parser.getCities: Check data file or string passed to function"
-    );
+    }).to.throw();
   });
 
   it("should return array of cities given proper data", () => {
