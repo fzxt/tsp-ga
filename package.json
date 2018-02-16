@@ -39,6 +39,7 @@
     "exclude": [
       "tests/**/*.ts",
       "out/**/*.*",
+      "src/index.ts",
       "webpack.config.js",
       "coverage/*",
       "**/*.d.ts"
