@@ -19,4 +19,13 @@ export default class City {
 
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
+
+  public equals(city: City): boolean {
+    return (
+      city != undefined &&
+      city != null &&
+      city.point.x === this.point.x &&
+      city.point.y === this.point.y
+    );
+  }
 }
