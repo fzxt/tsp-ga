@@ -74,4 +74,18 @@ describe("Generation", () => {
       );
     });
   });
+
+  describe("getTour", () => {
+    it("should throw RangeError if invalid index is given", () => {
+      const generation = new Generation([]);
+      expect(() => generation.getTour(3)).to.throw(RangeError);
+    });
+
+    it("should return correct tour given valid index", () => {
+      const expectedTour = new Tour(citiesB);
+      const generation = new Generation([new Tour(citiesA), expectedTour]);
+      const selectedTour = generation.getTour(1);
+      expect(selectedTour).to.deep.equal(expectedTour);
+    });
+  });
 });
