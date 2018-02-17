@@ -12,10 +12,9 @@ NODE_COORD_SECTION
 3 11133.333300 42885.833300`;
 
 describe("Parser", () => {
-  it("should throw error on bad data", () => {
-    expect(() => {
-      Parser.getCities(`this is bad data`);
-    }).to.throw();
+  it("should throw error on bad data or empty data", () => {
+    expect(() => Parser.getCities("")).to.throw();
+    expect(() => Parser.getCities(`this is bad data`)).to.throw();
   });
 
   it("should return array of cities given proper data", () => {
