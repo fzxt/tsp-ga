@@ -3,6 +3,7 @@
         "module": "es6",
         "noImplicitAny": false,
         "lib": [
+            "es2016.array.include",
             "es6",
             "dom"
         ],

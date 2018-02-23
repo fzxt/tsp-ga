@@ -1,6 +1,7 @@
 {   
     "compilerOptions": {
         "lib": [
+            "es2016.array.include",
             "es6",
             "dom"
         ],
