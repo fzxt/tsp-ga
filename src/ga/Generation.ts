@@ -11,6 +11,10 @@ export default class Generation {
     return this.tours[index];
   }
 
+  get size(): number {
+    return this.tours.length;
+  }
+
   get averageFitness(): number {
     if (this.tours.length === 0) {
       return 0;
