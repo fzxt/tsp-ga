@@ -1,28 +1,20 @@
 import Generation from "../ga/Generation";
 import Tour from "../tsp/Tour";
 import Selection from "./selection";
+const shuffle = require("lodash.shuffle");
 
 export default class TournamentSelection implements Selection {
-  /**
-   * Fisher yates shuffle
-   * @param {Array} array items An array containing the items.
-   */
-  private shuffle(array: Array<any>) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const idx = Math.floor(Math.random() * (i + 1));
-      [array[i], array[idx]] = [array[idx], array[i]];
-    }
-
-    return array;
-  }
-
   private getKTours(generation: Generation, k: number): Tour[] {
     if (k < 1) {
       throw Error("K must be greater than 0.");
     }
 
+    if (generation.size == 0) {
+      throw new Error("Cannot select K tours from empty generation");
+    }
+
     let kTours = [];
-    let randomIndexes = this.shuffle(
+    let randomIndexes = shuffle(
       Array.from({ length: generation.size }, (x, i) => i)
     );
 
