@@ -9,9 +9,12 @@ import City from "../tsp/City";
  */
 
 export default class UniformOrderCrossover implements Crossover {
-  constructor(private bitmask: number[], bitmaskSize: number = 0) {
-    this.bitmask = bitmask || this.generateRandomBitmaskOfSize(bitmaskSize);
-  }
+  constructor(
+    bitmaskSize: number = 0,
+    private bitmask: number[] = UniformOrderCrossover.generateRandomBitmaskOfSize(
+      bitmaskSize
+    )
+  ) {}
 
   public crossover(parentA: Tour, parentB: Tour): Tour[] {
     if (parentA.size != parentB.size) {

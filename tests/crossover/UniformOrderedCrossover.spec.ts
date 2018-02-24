@@ -86,7 +86,7 @@ describe("UniformOrderCrossover", () => {
   describe("uniformCrossover", () => {
     it("should perform crossover correctly given bitmask", () => {
       // prettier-ignore
-      let [ childA, childB ] = new UniformOrderCrossover([0, 1, 1, 0, 1, 0, 1]).crossover(parentA, parentB);
+      let [ childA, childB ] = new UniformOrderCrossover(parentA.size, [0, 1, 1, 0, 1, 0, 1]).crossover(parentA, parentB);
 
       let expectedChildA = [
         parentB.cities[0],
