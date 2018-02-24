@@ -21,7 +21,7 @@ export default class Generation {
     }
 
     const sum = this.tours.reduce(
-      (sum, { totalDistance }) => sum + totalDistance,
+      (acc, { totalDistance }) => acc + totalDistance,
       0
     );
 

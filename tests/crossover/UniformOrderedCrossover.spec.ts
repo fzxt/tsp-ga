@@ -1,9 +1,9 @@
-import "mocha";
 import { expect } from "chai";
+import "mocha";
 
 import UniformOrderCrossover from "../../src/crossover/UniformOrderedCrossover";
-import Tour from "../../src/tsp/Tour";
 import City from "../../src/tsp/City";
+import Tour from "../../src/tsp/Tour";
 
 let parentA: Tour;
 let parentB: Tour;
@@ -86,9 +86,9 @@ describe("UniformOrderCrossover", () => {
   describe("uniformCrossover", () => {
     it("should perform crossover correctly given bitmask", () => {
       // prettier-ignore
-      let [ childA, childB ] = new UniformOrderCrossover(parentA.size, [0, 1, 1, 0, 1, 0, 1]).crossover(parentA, parentB);
+      const [ childA, childB ] = new UniformOrderCrossover(parentA.size, [0, 1, 1, 0, 1, 0, 1]).crossover(parentA, parentB);
 
-      let expectedChildA = [
+      const expectedChildA = [
         parentB.cities[0],
         parentA.cities[1],
         parentA.cities[2],
@@ -98,7 +98,7 @@ describe("UniformOrderCrossover", () => {
         parentA.cities[6]
       ];
 
-      let expectedChildB = [
+      const expectedChildB = [
         parentA.cities[0],
         parentB.cities[1],
         parentB.cities[2],

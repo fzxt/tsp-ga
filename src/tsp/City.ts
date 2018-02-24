@@ -22,8 +22,8 @@ export default class City {
 
   public equals(city: City): boolean {
     return (
-      city != undefined &&
-      city != null &&
+      city !== undefined &&
+      city !== null &&
       city.point.x === this.point.x &&
       city.point.y === this.point.y
     );

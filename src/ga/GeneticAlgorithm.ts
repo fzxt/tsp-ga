@@ -1,18 +1,19 @@
+// tslint:disable-next-line
 const shuffle = require("lodash.shuffle");
 
 import City from "../tsp/City";
 import Tour from "../tsp/Tour";
 
-import Generation from "./Generation";
+import Crossover from "../crossover/Crossover.interface";
+import UniformOrderCrossover from "../crossover/UniformOrderedCrossover";
+import Mutation from "../mutation/Mutation.interface";
+import SwapMutation from "../mutation/SwapMutation";
 import Selection from "../selection/Selection";
 import TournamentSelection from "../selection/TournamentSelection";
-import UniformOrderCrossover from "../crossover/UniformOrderedCrossover";
-import Crossover from "../crossover/Crossover.interface";
-import SwapMutation from "../mutation/SwapMutation";
-import Mutation from "../mutation/Mutation.interface";
+import Generation from "./Generation";
 
 export default class GeneticAlgorithm {
-  private readonly GENERATION_SIZE: Number = 500;
+  private readonly GENERATION_SIZE = 500;
 
   private readonly initialCities: City[];
   private readonly selectionStrategy: Selection;
@@ -32,23 +33,26 @@ export default class GeneticAlgorithm {
     let iterations = 0;
     let parent = this.createInitialGeneration(this.initialCities);
 
-    if (parent.size == 0) {
+    if (parent.size === 0) {
       throw new Error("GA.run(): Initial generation was empty! aborting");
     }
 
     while (iterations < this.GENERATION_SIZE) {
-      let generatedChildren = this.generateChildrenFromParent(parent);
+      const generatedChildren = this.generateChildrenFromParent(parent);
       parent = new Generation(generatedChildren);
+
+      // tslint:disable-next-line
       console.log(`Average fitness: ${parent.averageFitness}`);
+
       iterations++;
     }
   }
 
   private generateChildrenFromParent(parent: Generation): Tour[] {
-    let generatedChildren: Tour[] = [];
+    const generatedChildren: Tour[] = [];
 
     while (generatedChildren.length < this.GENERATION_SIZE) {
-      let [parentA, parentB] = [
+      const [parentA, parentB] = [
         this.selectionStrategy.select(parent, this.initialCities.length),
         this.selectionStrategy.select(parent, this.initialCities.length)
       ];
@@ -65,10 +69,10 @@ export default class GeneticAlgorithm {
   }
 
   private createInitialGeneration(initialCities: City[]): Generation {
-    let initialPopulation: Tour[] = [];
+    const initialPopulation: Tour[] = [];
 
     for (let i = 0; i < this.GENERATION_SIZE; i++) {
-      let cities = shuffle(initialCities);
+      const cities = shuffle(initialCities);
       initialPopulation.push(new Tour(cities));
     }
 

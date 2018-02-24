@@ -1,20 +1,37 @@
+// tslint:disable-next-line
+const shuffle = require("lodash.shuffle");
+
 import Generation from "../ga/Generation";
 import Tour from "../tsp/Tour";
 import Selection from "./selection";
-const shuffle = require("lodash.shuffle");
 
 export default class TournamentSelection implements Selection {
+  public select(gen: Generation, k: number): Tour {
+    const kTours = this.getKTours(gen, k);
+
+    let bestTour: Tour = kTours[0];
+
+    for (let i = 1; i < kTours.length; i++) {
+      const tour = kTours[i];
+      if (tour.totalDistance < bestTour.totalDistance) {
+        bestTour = tour;
+      }
+    }
+
+    return bestTour;
+  }
+
   private getKTours(generation: Generation, k: number): Tour[] {
     if (k < 1) {
       throw Error("K must be greater than 0.");
     }
 
-    if (generation.size == 0) {
+    if (generation.size === 0) {
       throw new Error("Cannot select K tours from empty generation");
     }
 
-    let kTours = [];
-    let randomIndexes = shuffle(
+    const kTours = [];
+    const randomIndexes = shuffle(
       Array.from({ length: generation.size }, (x, i) => i)
     );
 
@@ -23,20 +40,5 @@ export default class TournamentSelection implements Selection {
     }
 
     return kTours;
-  }
-
-  select(gen: Generation, k: number): Tour {
-    let kTours = this.getKTours(gen, k);
-
-    let bestTour: Tour = kTours[0];
-
-    for (let i = 1; i < kTours.length; i++) {
-      let tour = kTours[i];
-      if (tour.totalDistance < bestTour.totalDistance) {
-        bestTour = tour;
-      }
-    }
-
-    return bestTour;
   }
 }

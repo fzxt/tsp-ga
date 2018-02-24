@@ -1,7 +1,7 @@
 import Crossover from "./Crossover.interface";
 
-import Tour from "../tsp/Tour";
 import City from "../tsp/City";
+import Tour from "../tsp/Tour";
 
 /**
  * Implementation of the uniform order crossover.
@@ -9,6 +9,10 @@ import City from "../tsp/City";
  */
 
 export default class UniformOrderCrossover implements Crossover {
+  private static generateRandomBitmaskOfSize(size: number): number[] {
+    return new Array(size).fill(Math.round(Math.random()));
+  }
+
   constructor(
     bitmaskSize: number = 0,
     private bitmask: number[] = UniformOrderCrossover.generateRandomBitmaskOfSize(
@@ -17,14 +21,14 @@ export default class UniformOrderCrossover implements Crossover {
   ) {}
 
   public crossover(parentA: Tour, parentB: Tour): Tour[] {
-    if (parentA.size != parentB.size) {
+    if (parentA.size !== parentB.size) {
       throw Error(
         "Crossover: Error, parents have different sizes. Cannot perform crossover"
       );
     }
 
-    let childA: City[] = new Array(this.bitmask.length).fill(null);
-    let childB: City[] = new Array(this.bitmask.length).fill(null);
+    const childA: City[] = new Array(this.bitmask.length).fill(null);
+    const childB: City[] = new Array(this.bitmask.length).fill(null);
 
     this.passGenesFromParents(childA, parentA, childB, parentB);
     this.passRestFromOtherParent(parentB, childA, parentA, childB);
@@ -53,8 +57,8 @@ export default class UniformOrderCrossover implements Crossover {
     childB: City[]
   ) {
     // compute the set difference between child one, and parent b
-    let notInA = parentB.cities.filter(city => !this.contains(childA, city));
-    let notInB = parentA.cities.filter(city => !this.contains(childB, city));
+    const notInA = parentB.cities.filter(city => !this.contains(childA, city));
+    const notInB = parentA.cities.filter(city => !this.contains(childB, city));
     // fill in the null values
     for (let i = 0; i < this.bitmask.length; i++) {
       if (childA[i] === null) {
@@ -66,15 +70,13 @@ export default class UniformOrderCrossover implements Crossover {
     }
   }
 
-  private contains(child: City[], city: City): boolean {
-    for (let i = 0; i < child.length; i++) {
-      if (child[i] !== null && child[i].equals(city)) return true;
+  private contains(child: City[], otherCity: City): boolean {
+    for (const city of child) {
+      if (city !== null && city.equals(otherCity)) {
+        return true;
+      }
     }
 
     return false;
-  }
-
-  private static generateRandomBitmaskOfSize(size: number): number[] {
-    return new Array(size).fill(Math.round(Math.random()));
   }
 }

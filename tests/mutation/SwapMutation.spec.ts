@@ -1,9 +1,9 @@
-import "mocha";
 import { expect } from "chai";
+import "mocha";
 
-import Tour from "../../src/tsp/Tour";
 import SwapMutation from "../../src/mutation/SwapMutation";
 import City from "../../src/tsp/City";
+import Tour from "../../src/tsp/Tour";
 
 let emptyTour: Tour;
 let tourWithCities: Tour;
@@ -18,13 +18,13 @@ describe("SwapMutation", () => {
   });
 
   it("should not mutate tour.swapCitiesByIndex given tour with no cities", () => {
-    let swappedTour = new SwapMutation().mutate(emptyTour);
+    const swappedTour = new SwapMutation().mutate(emptyTour);
     expect(swappedTour).to.equal(emptyTour);
   });
 
   it("should swap cities in tour given tour with cities", () => {
-    let tour = new Tour([...tourWithCities.cities]);
-    let swappedTour: Tour = new SwapMutation().mutate(tour);
+    const tour = new Tour([...tourWithCities.cities]);
+    const swappedTour: Tour = new SwapMutation().mutate(tour);
     expect(swappedTour.cities).to.not.deep.equal(tourWithCities.cities);
     expect(swappedTour.size).to.be.equal(tourWithCities.size);
   });

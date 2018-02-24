@@ -1,30 +1,30 @@
-import "mocha";
 import { expect } from "chai";
+import "mocha";
 import { stub } from "sinon";
 
-import TournamentSelection from "../../src/selection/TournamentSelection";
 import Generation from "../../src/ga/Generation";
-import Tour from "../../src/tsp/Tour";
+import TournamentSelection from "../../src/selection/TournamentSelection";
 import City from "../../src/tsp/City";
+import Tour from "../../src/tsp/Tour";
 
 let gen: Generation;
 let bestTour: Tour;
 describe("TournamentSelection", () => {
   before(() => {
-    let citiesA = [
+    const citiesA = [
       new City({ x: 100, y: 200 }),
       new City({ x: 200, y: 300 }),
       new City({ x: 400, y: 500 })
     ];
 
-    let citiesB = [
+    const citiesB = [
       new City({ x: 400, y: 500 }),
       new City({ x: 800, y: 300 }),
       new City({ x: 100, y: 200 })
     ];
 
-    let tourA = new Tour(citiesA);
-    let tourB = new Tour(citiesB);
+    const tourA = new Tour(citiesA);
+    const tourB = new Tour(citiesB);
 
     bestTour = tourA.totalDistance < tourB.totalDistance ? tourA : tourB;
 
@@ -33,8 +33,8 @@ describe("TournamentSelection", () => {
 
   describe("select", () => {
     it("should give the best tour", () => {
-      let selectionStategy = new TournamentSelection();
-      let selected = selectionStategy.select(gen, 2);
+      const selectionStategy = new TournamentSelection();
+      const selected = selectionStategy.select(gen, 2);
       expect(selected).to.deep.equal(bestTour);
     });
   });
