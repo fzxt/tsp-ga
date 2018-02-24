@@ -71,7 +71,7 @@ export default class UniformOrderCrossover implements Crossover {
     return false;
   }
 
-  private generateRandomBitmaskOfSize(size: number): number[] {
-    return new Array(size).fill(Math.random());
+  private static generateRandomBitmaskOfSize(size: number): number[] {
+    return new Array(size).fill(Math.round(Math.random()));
   }
 }
