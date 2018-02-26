@@ -7,7 +7,7 @@ import Selection from "./selection";
 
 export default class TournamentSelection implements Selection {
   public select(gen: Generation, k: number): Tour {
-    const kTours = this.getKTours(gen, k);
+    const kTours = this.getKRandomTours(gen, k);
 
     let bestTour: Tour = kTours[0];
 
@@ -21,7 +21,7 @@ export default class TournamentSelection implements Selection {
     return bestTour;
   }
 
-  private getKTours(generation: Generation, k: number): Tour[] {
+  private getKRandomTours(generation: Generation, k: number): Tour[] {
     if (k < 1) {
       throw Error("K must be greater than 0.");
     }
