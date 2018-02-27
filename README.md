@@ -4,6 +4,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a78f95a994a6384e5d6f/test_coverage)](https://codeclimate.com/repos/5a85e6d589f16108470002ad/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a78f95a994a6384e5d6f/maintainability)](https://codeclimate.com/repos/5a85e6d589f16108470002ad/maintainability)
 
+![Screenshot](./images/screenshot.png)
+
 > Travelling salesman problem solved via genetic algorithm
 
 ## Dev
