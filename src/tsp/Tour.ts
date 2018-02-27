@@ -1,6 +1,10 @@
 import City from "./City";
 
 export default class Tour {
+  public static compareTo(tour: Tour, other: Tour): number {
+    return tour.totalDistance - other.totalDistance;
+  }
+
   constructor(public cities: City[]) {}
 
   public get size(): number {

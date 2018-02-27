@@ -41,6 +41,18 @@ describe("Generation", () => {
     ];
   });
 
+  it("should return the correct best fitness", () => {
+    const tourA = new Tour(citiesA);
+    const tourB = new Tour(citiesB);
+
+    const generation = new Generation([tourA, tourB]);
+    const bestFitness = generation.bestFitness;
+
+    expect(bestFitness).to.equal(
+      Math.min(tourA.totalDistance, tourB.totalDistance)
+    );
+  });
+
   describe("averageFitness", () => {
     it("should return 0 for average fitness when no tours", () => {
       const generation = new Generation([]);

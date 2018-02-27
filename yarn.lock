@@ -22,6 +22,10 @@
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.2.tgz#f1af664769cfb50af805431c407425ed619daa21"
 
+"@types/js-priority-queue@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@types/js-priority-queue/-/js-priority-queue-0.0.5.tgz#71065323ae2b87c168ec6a553bf074e29d985e53"
+
 "@types/lodash.shuffle@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@types/lodash.shuffle/-/lodash.shuffle-4.2.3.tgz#f2355c37d1ab4a43c9db402751c1aee6fed96ae2"
