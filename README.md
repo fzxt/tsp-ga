@@ -6,7 +6,7 @@
 
 ![Screenshot](./images/screenshot.png)
 
-> Travelling salesman problem solved via genetic algorithm
+> Travelling salesman problem solved via genetic algorithm, [Demo](https://fzxt.github.io/tsp-ga/)
 
 ## Dev
 ```
