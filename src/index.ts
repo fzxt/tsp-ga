@@ -17,10 +17,10 @@ const iterator: IterableIterator<GeneticAlgorithmResult> = ga.run();
 const bestFitnessTextNode = document.getElementById("bestFitness");
 const averageFitnessTextNode = document.getElementById("avgFitness");
 
-const GRAPH_HEIGHT = 400 / 16 * 9;
-const GRAPH_WIDTH = 600;
-
 const $graph = document.getElementById("graph");
+
+const GRAPH_HEIGHT = 507;
+const GRAPH_WIDTH = 900;
 
 const graph: TourGraph = new TourGraph({
   cities,
@@ -38,6 +38,7 @@ function renderStats(bestFitness: number, avgFitness: number) {
 function setupGraph() {
   graph.init();
   graph.drawTour(new Tour(cities));
+  // Draw cities after to ensure the nodes are on top of the tour path lines
   graph.drawCities();
 }
 
@@ -51,7 +52,6 @@ function update() {
   graph.drawTour(results.bestTour);
 
   renderStats(results.bestFitness, results.averageFitness);
-
   requestAnimationFrame(update);
 }
 

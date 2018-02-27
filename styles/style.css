@@ -10,16 +10,27 @@ body {
   background-attachment: fixed;
 }
 
+.container {
+  min-width: 1000px;
+  text-align: center;
+}
+
 h1,
 h2 {
+  font-family: "Roboto-Thin", sans-serif;
   font-weight: 200;
+}
+
+#graph {
+  display: block;
+  margin: 0 auto;
 }
 
 .card {
   padding: 3rem;
-  display: inline-block;
   background-color: #2e2d36;
   border-radius: 3px;
+  margin: 20px;
 }
 
 .stats-container {

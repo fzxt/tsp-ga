@@ -99,7 +99,9 @@ export default class TourGraph {
     this.svg = d3
       .select(this.config.container)
       .attr("width", this.config.width)
-      .attr("height", this.config.height);
+      .attr("height", this.config.height)
+      .attr("viewBox", `0 0 ${this.config.width} ${this.config.height}`)
+      .attr("preserveAspectRatio", "xMidYMid meet");
   }
 
   private makeNodes(cities: City[]) {
