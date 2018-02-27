@@ -3,10 +3,17 @@ import City from "../tsp/City";
 import Tour from "../tsp/Tour";
 
 interface TourGraphConfig {
+  container: HTMLElement;
   cities: City[];
   width: number;
   height: number;
   node_radius?: number;
+}
+
+interface RGBColor {
+  r: number;
+  g: number;
+  b: number;
 }
 
 export default class TourGraph {
@@ -17,6 +24,10 @@ export default class TourGraph {
   private linearScaleY: d3.ScaleLinear<number, number>;
 
   constructor(private config: TourGraphConfig) {
+    if (this.config.container.nodeName !== "svg") {
+      throw new Error("TourGraph: Error, container must be an SVG element");
+    }
+
     this.config.node_radius = config.node_radius || 5;
 
     const { cities, height, width } = this.config;
@@ -28,21 +39,44 @@ export default class TourGraph {
       .scaleLinear()
       .domain([minX, maxX])
       // so we aren't drawing cities on the edges
-      .range([10, width - 10]);
+      .range([30, width - 30]);
 
     this.linearScaleY = d3
       .scaleLinear()
       .domain([minY, maxY])
-      .range([10, height - 10]);
+      .range([30, height - 30]);
   }
 
   public drawCities() {
-    this.node
-      .enter()
+    this.node = this.svg
+      .append("g")
+      .selectAll("g")
+      .data(this.makeNodes(this.config.cities));
+
+    const container = this.node.enter().append("g");
+
+    container
       .append("circle")
+      .attr("class", "node")
+      .attr("fill", (d, i) =>
+        this.findColorBetween(
+          { r: 182, g: 65, b: 100 },
+          { r: 96, g: 46, b: 108 },
+          i / this.config.cities.length
+        )
+      )
       .attr("r", this.config.node_radius)
       .attr("cx", d => d.x)
-      .attr("cy", d => d.y);
+      .attr("cy", d => d.y)
+      .merge(container);
+
+    container
+      .append("text")
+      .attr("fill", "white")
+      .attr("x", d => d.x)
+      .attr("y", d => d.y - 10)
+      .text((d, i) => `${i + 1}`)
+      .merge(container);
   }
 
   public drawTour(tour: Tour) {
@@ -52,7 +86,7 @@ export default class TourGraph {
       .enter()
       .append("line")
       .attr("class", "link")
-      .attr("stroke", "black")
+      .attr("stroke", "#979797")
       .attr("stroke-width", 2)
       .merge(link)
       .attr("x1", d => this.linearScaleX(d.source.x))
@@ -63,15 +97,9 @@ export default class TourGraph {
 
   public init() {
     this.svg = d3
-      .select("body")
-      .append("svg")
+      .select(this.config.container)
       .attr("width", this.config.width)
       .attr("height", this.config.height);
-
-    this.node = this.svg
-      .append("g")
-      .selectAll("g")
-      .data(this.makeNodes(this.config.cities));
   }
 
   private makeNodes(cities: City[]) {
@@ -79,6 +107,19 @@ export default class TourGraph {
       x: this.linearScaleX(city.point.x),
       y: this.linearScaleY(city.point.y)
     }));
+  }
+
+  private findColorBetween(
+    left: RGBColor,
+    right: RGBColor,
+    percentage: number
+  ): string {
+    const channels = ["r", "g", "b"];
+    const color = { r: 0, g: 0, b: 0 };
+    channels.forEach(
+      c => (color[c] = Math.round(left[c] + (right[c] - left[c]) * percentage))
+    );
+    return `rgb(${color.r},${color.g},${color.b})`;
   }
 
   private makeLinks(cities: City[]) {

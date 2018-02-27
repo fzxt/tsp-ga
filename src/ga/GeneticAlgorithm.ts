@@ -12,6 +12,11 @@ import Selection from "../selection/Selection";
 import TournamentSelection from "../selection/TournamentSelection";
 import Generation from "./Generation";
 
+export interface GeneticAlgorithmConfig {
+  cities: City[];
+  genSize: number;
+}
+
 export interface GeneticAlgorithmResult {
   averageFitness: number;
   bestFitness: number;
@@ -19,15 +24,15 @@ export interface GeneticAlgorithmResult {
 }
 
 export class GeneticAlgorithm {
-  private readonly GENERATION_SIZE = 50;
-
+  private GENERATION_SIZE;
   private readonly initialCities: City[];
   private readonly selectionStrategy: Selection;
   private readonly crossoverStrategy: Crossover;
   private readonly mutationStrategy: Mutation;
 
-  constructor(cities: City[]) {
-    this.initialCities = cities;
+  constructor(config: GeneticAlgorithmConfig) {
+    this.initialCities = config.cities;
+    this.GENERATION_SIZE = config.genSize;
     this.selectionStrategy = new TournamentSelection();
     this.crossoverStrategy = new UniformOrderCrossover(
       this.initialCities.length

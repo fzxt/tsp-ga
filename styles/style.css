@@ -1,0 +1,32 @@
+body {
+  font-family: "Roboto-Thin", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #d1deeb;
+  height: 100%;
+  padding: 3rem;
+  background: linear-gradient(#a6c0fe, #f68084);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1,
+h2 {
+  font-weight: 200;
+}
+
+.card {
+  padding: 3rem;
+  display: inline-block;
+  background-color: #2e2d36;
+  border-radius: 3px;
+}
+
+.stats-container {
+  text-align: center;
+}
+
+.stats {
+  display: inline-block;
+  margin: 20px;
+}

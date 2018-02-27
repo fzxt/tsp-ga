@@ -12,29 +12,33 @@ import City from "./tsp/City";
 import Tour from "./tsp/Tour";
 
 const cities = Parser.getCities(data);
-const ga = new GeneticAlgorithm(cities);
+const ga = new GeneticAlgorithm({ cities, genSize: 500 });
 const iterator: IterableIterator<GeneticAlgorithmResult> = ga.run();
 const bestFitnessTextNode = document.getElementById("bestFitness");
+const averageFitnessTextNode = document.getElementById("avgFitness");
 
-const GRAPH_HEIGHT = 800;
+const GRAPH_HEIGHT = 400 / 16 * 9;
 const GRAPH_WIDTH = 600;
+
+const $graph = document.getElementById("graph");
 
 const graph: TourGraph = new TourGraph({
   cities,
+  container: $graph,
   height: GRAPH_HEIGHT,
+  node_radius: 8,
   width: GRAPH_WIDTH
 });
 
 function renderStats(bestFitness: number, avgFitness: number) {
-  bestFitnessTextNode.textContent = `Best: ${bestFitness.toFixed(
-    4
-  )}\tAvg: ${avgFitness.toFixed(4)}`;
+  bestFitnessTextNode.textContent = `${bestFitness.toFixed(4)}`;
+  averageFitnessTextNode.textContent = `${avgFitness.toFixed(4)}`;
 }
 
 function setupGraph() {
   graph.init();
-  graph.drawCities();
   graph.drawTour(new Tour(cities));
+  graph.drawCities();
 }
 
 function update() {
