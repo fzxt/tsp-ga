@@ -12,8 +12,14 @@ import Selection from "../selection/Selection";
 import TournamentSelection from "../selection/TournamentSelection";
 import Generation from "./Generation";
 
-export default class GeneticAlgorithm {
-  private readonly GENERATION_SIZE = 500;
+export interface GeneticAlgorithmResult {
+  averageFitness: number;
+  bestFitness: number;
+  bestTour: Tour;
+}
+
+export class GeneticAlgorithm {
+  private readonly GENERATION_SIZE = 50;
 
   private readonly initialCities: City[];
   private readonly selectionStrategy: Selection;
@@ -29,7 +35,7 @@ export default class GeneticAlgorithm {
     this.mutationStrategy = new SwapMutation();
   }
 
-  public run() {
+  public *run(): IterableIterator<GeneticAlgorithmResult> {
     let iterations = 0;
     let parent = this.createInitialGeneration(this.initialCities);
 
@@ -37,15 +43,30 @@ export default class GeneticAlgorithm {
       throw new Error("GA.run(): Initial generation was empty! aborting");
     }
 
-    while (iterations < this.GENERATION_SIZE) {
-      const generatedChildren = this.generateChildrenFromParent(parent);
-      parent = new Generation(generatedChildren);
+    const results: GeneticAlgorithmResult = {
+      averageFitness: 0,
+      bestFitness: Number.MAX_VALUE,
+      bestTour: parent.bestTour
+    };
 
-      // tslint:disable-next-line
-      console.log(`Average fitness: ${parent.averageFitness}`);
+    while (iterations < this.GENERATION_SIZE) {
+      const children = this.generateChildrenFromParent(parent);
+
+      parent = new Generation(children);
+
+      results.averageFitness = parent.averageFitness;
+      results.bestFitness = parent.bestFitness;
+      results.bestTour = parent.bestTour;
+
+      yield results;
 
       iterations++;
     }
+
+    return {
+      done: true,
+      value: results
+    };
   }
 
   private generateChildrenFromParent(parent: Generation): Tour[] {
