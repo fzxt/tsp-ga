@@ -10,6 +10,14 @@ body {
   background-attachment: fixed;
 }
 
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
 .container {
   min-width: 1000px;
   text-align: center;
@@ -27,10 +35,32 @@ h2 {
 }
 
 .card {
-  padding: 3rem;
-  background-color: #2e2d36;
+  position: relative;
+  perspective: 100rem;
+  height: 800px;
   border-radius: 3px;
-  margin: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.side {
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  height: 800px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #2e2d36;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.flip {
+  transform: rotateY(180deg);
 }
 
 .stats-container {
@@ -43,10 +73,15 @@ h2 {
 }
 
 .btn {
+  background-color: transparent;
   border: none;
+  margin: 10px;
+}
+
+.close {
+  float: right;
 }
 
 .settings {
   float: right;
-  background-color: transparent;
 }

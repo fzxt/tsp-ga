@@ -12,15 +12,21 @@ import City from "./tsp/City";
 import Tour from "./tsp/Tour";
 
 const cities = Parser.getCities(data);
-const ga = new GeneticAlgorithm({ cities, genSize: 500 });
+const ga = new GeneticAlgorithm({ cities, genSize: 50 });
 const iterator: IterableIterator<GeneticAlgorithmResult> = ga.run();
 const bestFitnessTextNode = document.getElementById("bestFitness");
 const averageFitnessTextNode = document.getElementById("avgFitness");
 
+const $card = document.getElementById("card");
 const $graph = document.getElementById("graph");
+const $settingsBtn = document.getElementById("btn-settings");
+const $closeSettingsBtn = document.getElementById("btn-close");
 
 const GRAPH_HEIGHT = 507;
 const GRAPH_WIDTH = 900;
+
+$settingsBtn.addEventListener("click", onSettingsClick);
+$closeSettingsBtn.addEventListener("click", onCloseClicked);
 
 const graph: TourGraph = new TourGraph({
   cities,
@@ -33,6 +39,14 @@ const graph: TourGraph = new TourGraph({
 function renderStats(bestFitness: number, avgFitness: number) {
   bestFitnessTextNode.textContent = `${bestFitness.toFixed(4)}`;
   averageFitnessTextNode.textContent = `${avgFitness.toFixed(4)}`;
+}
+
+function onSettingsClick(e: Event) {
+  $card.classList.add("flip");
+}
+
+function onCloseClicked(e: Event) {
+  $card.classList.remove("flip");
 }
 
 function setupGraph() {

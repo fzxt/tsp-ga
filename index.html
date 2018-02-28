@@ -12,19 +12,26 @@
 
 <body>
     <div class="container">
-        <div class="graph card">
-            <button class="btn settings"><img src="assets/ic_settings_white_24px.svg"></img></button>
-            <h1>Travelling Salesman Problem - Visualization</h1>
-            <svg id="graph"></svg>
-            <div class="stats-container">
-                <div class="stats">
-                    <h1 id="bestFitness"></h1>
-                    <h2>Best Distance</h2>
+        <div id="card" class="graph card">
+            <div class="side front">
+                <button id="btn-settings" class="btn settings"><img src="assets/ic_settings_white_24px.svg"></img></button>
+                <h1>Travelling Salesman Problem - Visualization</h1>
+                <svg id="graph"></svg>
+                <div class="stats-container">
+                    <div class="stats">
+                        <h1 id="bestFitness"></h1>
+                        <h2>Best Distance</h2>
+                    </div>
+                    <div class="stats">
+                        <h1 id="avgFitness"></h1>
+                        <h2>Average Distance</h2>
+                    </div>
                 </div>
-                <div class="stats">
-                    <h1 id="avgFitness"></h1>
-                    <h2>Average Distance</h2>
-                </div>
+            </div>
+            <div class="side back">
+                <button id="btn-close" class="btn close"><img src="assets/ic_close_white_24px.svg"></img></button>
+                <h1>Parameters</h1>
+                <input type="text"></input>
             </div>
         </div>
     </div>
