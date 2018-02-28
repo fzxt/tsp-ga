@@ -41,3 +41,12 @@ h2 {
   display: inline-block;
   margin: 20px;
 }
+
+.btn {
+  border: none;
+}
+
+.settings {
+  float: right;
+  background-color: transparent;
+}
